@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 <meta name="theme-color" content="#0A0A0F"/>
-<title>UzSkin</title>
+<title>SKINUZ</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -60,7 +60,7 @@ body,#root{background:#0A0A0F;color:#F0EAD6;font-family:'Barlow','Segoe UI',sans
 <body>
 <div id="splash">
   <div style="font-size:72px">💎</div>
-  <div class="logo">UzSkin</div>
+  <div class="logo">SKINUZ</div>
   <div class="sub">CS2 SKIN PLATFORMASI</div>
   <div class="spin">⟳</div>
 </div>
@@ -209,6 +209,26 @@ const STARS_PACKAGES = [
   {stars:200, crystals:10000, label:"VIP", bonus:"+100%", hot:true},
 ];
 
+// ═══ DINAMIK MA'LUMOTLAR (Admin tomonidan boshqariladi) ═══
+const loadAdminCases=()=>{
+  try{const s=localStorage.getItem("uz_admin_cases_v2");return s?JSON.parse(s):null;}catch{return null;}
+};
+const saveAdminCases=(arr)=>{
+  try{localStorage.setItem("uz_admin_cases_v2",JSON.stringify(arr));}catch{}
+};
+const loadAdminMarket=()=>{
+  try{const s=localStorage.getItem("uz_admin_market_v2");return s?JSON.parse(s):null;}catch{return null;}
+};
+const saveAdminMarket=(arr)=>{
+  try{localStorage.setItem("uz_admin_market_v2",JSON.stringify(arr));}catch{}
+};
+const loadAdminPackages=()=>{
+  try{const s=localStorage.getItem("uz_admin_packages_v2");return s?JSON.parse(s):null;}catch{return null;}
+};
+const saveAdminPackages=(arr)=>{
+  try{localStorage.setItem("uz_admin_packages_v2",JSON.stringify(arr));}catch{}
+};
+
 const getRandomItem=(items)=>{
   const total=items.reduce((s,i)=>s+i.chance,0);
   let r=Math.random()*total;
@@ -263,8 +283,8 @@ const CASES=[
       {name:"AK-47 | Vulcan",       rarity:"rare",     price:1.50,chance:8, image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
       {name:"M4A4 | Asiimov",       rarity:"epic",     price:3.50,chance:2, image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
       {name:"AWP | Lightning Strike",rarity:"epic",    price:4.50,chance:1.5,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
-      {name:"Desert Eagle | Blaze", rarity:"legendary",price:6.00,chance:0.4,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
-      {name:"Karambit | Doppler",   rarity:"legendary",price:5.50,chance:0.1,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
+      {name:"Desert Eagle | Blaze", rarity:"legendary",price:6.00,chance:0,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
+      {name:"Karambit | Doppler",   rarity:"legendary",price:5.50,chance:0,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
     ]
   },
   {
@@ -285,9 +305,9 @@ const CASES=[
       {name:"M4A1-S | Nightmare",     rarity:"rare",    price:2.00,chance:10,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
       {name:"AK-47 | Fire Serpent",   rarity:"epic",    price:10.00,chance:5,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
       {name:"AWP | Medusa",           rarity:"epic",    price:15.00,chance:2,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
-      {name:"M4A4 | Howl",            rarity:"legendary",price:20.00,chance:1.5,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
-      {name:"Karambit | Crimson Web", rarity:"legendary",price:22.00,chance:0.4,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
-      {name:"AWP | Dragon Lore",      rarity:"mythic",  price:25.00,chance:0.1,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
+      {name:"M4A4 | Howl",            rarity:"legendary",price:20.00,chance:0,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
+      {name:"Karambit | Crimson Web", rarity:"legendary",price:22.00,chance:0,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
+      {name:"AWP | Dragon Lore",      rarity:"mythic",  price:25.00,chance:0,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
     ]
   },
   {
@@ -305,9 +325,9 @@ const CASES=[
       {name:"P2000 | Imperial Dragon",rarity:"common",  price:0.30,chance:20,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
       {name:"M4A1-S | Nightmare",     rarity:"rare",    price:2.00,chance:18,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
       {name:"AK-47 | Fire Serpent",   rarity:"epic",    price:10.00,chance:8,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
-      {name:"AWP | Dragon Lore",      rarity:"mythic",  price:25.00,chance:3,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
-      {name:"Karambit | Crimson Web", rarity:"legendary",price:22.00,chance:0.8,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
-      {name:"M4A4 | Howl",            rarity:"legendary",price:20.00,chance:0.2,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
+      {name:"AWP | Dragon Lore",      rarity:"mythic",  price:25.00,chance:0,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
+      {name:"Karambit | Crimson Web", rarity:"legendary",price:22.00,chance:0,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
+      {name:"M4A4 | Howl",            rarity:"legendary",price:20.00,chance:0,image:"https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz"},
     ]
   },
 ];
@@ -346,7 +366,7 @@ const Header=({user,balance,userPhoto})=>(
         {userPhoto?<img src={userPhoto} style={{width:"100%",height:"100%",objectFit:"cover"}}/>:<span>{(user?.first_name||"P")[0].toUpperCase()}</span>}
       </div>
       <div>
-        <div style={{fontSize:11,color:C.textMuted,fontFamily:"'Rajdhani',sans-serif",letterSpacing:2,textTransform:"uppercase"}}>UzSkin</div>
+        <div style={{fontSize:11,color:C.textMuted,fontFamily:"'Rajdhani',sans-serif",letterSpacing:2,textTransform:"uppercase"}}>SKINUZ</div>
         <div style={{fontSize:18,fontFamily:"'Rajdhani',sans-serif",fontWeight:700}}>{user?.first_name||"O'yinchi"}</div>
       </div>
     </div>
@@ -402,7 +422,7 @@ const AuthScreen=({onLogin})=>{
     <div style={{minHeight:"100vh",background:C.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24}}>
       <div style={{marginBottom:32,textAlign:"center"}}>
         <div style={{animation:"floatCrystal 3s ease-in-out infinite",display:"inline-block",marginBottom:12,fontSize:80}}>💎</div>
-        <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:42,fontWeight:700,letterSpacing:4,color:C.accent}}>UzSkin</div>
+        <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:42,fontWeight:700,letterSpacing:4,color:C.accent}}>SKINUZ</div>
         <div style={{fontSize:13,color:C.textMuted,letterSpacing:2,marginTop:4}}>CS2 SKIN PLATFORMASI</div>
       </div>
       {[["💎","Keyslar oching, qimmat skinlar yuting"],["📤","Skinlarni Steam ga chiqarib oling"],["⭐","Telegram Stars bilan to'lov"],["👥","Do'stlarni taklif qilib bonus oling"]].map(([i,t])=>(
@@ -443,7 +463,7 @@ const AuthScreen=({onLogin})=>{
 };
 
 // ══ BALANCE PAGE ══
-const BalancePage=({user,balance,setBalance,userPhoto})=>{
+const BalancePage=({user,balance,setBalance,userPhoto,activePackages})=>{
   const [selPkg,setSelPkg]=useState(null);
   const [copied,setCopied]=useState(false);
   const [toast,setToast]=useState(null);
@@ -488,7 +508,7 @@ const BalancePage=({user,balance,setBalance,userPhoto})=>{
 
       {/* Paketlar */}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:20}}>
-        {STARS_PACKAGES.map((p,i)=>(
+        {(activePackages||STARS_PACKAGES).map((p,i)=>(
           <button key={i} onClick={()=>setSelPkg(selPkg===p?null:p)}
             style={{background:selPkg===p?"linear-gradient(135deg,rgba(123,47,190,0.3),rgba(91,31,158,0.15))":p.hot?"linear-gradient(135deg,rgba(123,47,190,0.12),rgba(91,31,158,0.04))":C.card,
               border:`2px solid ${selPkg===p?"#A855F7":p.hot?C.purple:C.border}`,
@@ -611,7 +631,7 @@ const BalancePage=({user,balance,setBalance,userPhoto})=>{
   );
 };
 // ══ CASES PAGE ══
-const CasesPage=({user,balance,setBalance,setInventory,onTaskComplete,userPhoto,skinPhotos})=>{
+const CasesPage=({user,balance,setBalance,setInventory,onTaskComplete,userPhoto,skinPhotos,activeCases})=>{
   const [sel,setSel]=useState(null);
   const [spinning,setSpinning]=useState(false);
   const [rItems,setRItems]=useState([]);
@@ -666,7 +686,7 @@ const CasesPage=({user,balance,setBalance,setInventory,onTaskComplete,userPhoto,
         <div style={{fontSize:13,color:C.textMuted,marginTop:4}}>Открывай кейсы и получай скины для Counter Strike 2</div>
       </div>
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
-        {CASES.map(cs=>(
+        {(activeCases||CASES).map(cs=>(
           <div key={cs.id} className="case-card" onClick={()=>openCase(cs)} style={{background:cs.bg,border:`1px solid ${cs.color}30`}}>
             {/* Opens badge */}
             <div style={{position:"absolute",top:10,left:10,background:"rgba(0,0,0,0.6)",borderRadius:8,padding:"3px 8px",fontSize:10,fontFamily:"'Rajdhani',sans-serif",fontWeight:700,color:"#fff",zIndex:1}}>
@@ -721,11 +741,13 @@ const CasesPage=({user,balance,setBalance,setInventory,onTaskComplete,userPhoto,
               <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:18,fontWeight:700}}>Balans yetarli emas</div>
               <div style={{fontSize:13,color:C.textMuted,marginTop:4}}>{payModal.name} uchun {payModal.price.toLocaleString()} 💎 kerak</div>
             </div>
-            <button className="btn-stars" onClick={()=>openWithStars(payModal)}>
-              ⭐ {payModal.stars} Stars bilan ochish
-            </button>
+            <div style={{background:`${C.accent}08`,border:`1px solid ${C.accent}25`,borderRadius:12,padding:"14px 16px",marginBottom:12,textAlign:"center"}}>
+              <div style={{fontSize:28,marginBottom:8}}>💎</div>
+              <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:15,fontWeight:700,marginBottom:4}}>Almaz yetarli emas</div>
+              <div style={{fontSize:12,color:C.textMuted,lineHeight:1.6}}>Balansingizda almaz qolmagan.<br/>Almaz olish uchun adminga murojat qiling.</div>
+            </div>
             <a href={ADMIN_LINK} target="_blank" style={{textDecoration:"none",display:"block",marginBottom:8}}>
-              <button className="btn-primary" style={{marginTop:0}}>💬 Kristal sotib olish</button>
+              <button className="btn-tg" style={{marginTop:0}}>✈️ ADMINGA MUROJAT QILISH</button>
             </a>
             <button className="btn-secondary" onClick={()=>setPayModal(null)}>Bekor qilish</button>
           </div>
@@ -799,12 +821,12 @@ const CasesPage=({user,balance,setBalance,setInventory,onTaskComplete,userPhoto,
 };
 
 // ══ MARKET PAGE ══
-const MarketPage=({user,balance,userPhoto,skinPhotos})=>{
+const MarketPage=({user,balance,userPhoto,skinPhotos,activeMarket})=>{
   const [search,setSearch]=useState("");
   const [category,setCategory]=useState("all");
   const [selItem,setSelItem]=useState(null);
   const cats=["all","knife","rifle","sniper"];
-  const filtered=MARKET_ITEMS.filter(i=>{
+  const filtered=(activeMarket||MARKET_ITEMS).filter(i=>{
     const matchCat=category==="all"||i.category===category;
     const matchSearch=i.type.toLowerCase().includes(search.toLowerCase());
     return matchCat&&matchSearch;
@@ -1195,85 +1217,6 @@ const TasksPage=({user,balance,setBalance,completedTasks,setCompletedTasks,saveU
           </div>
         );
       })}
-      {/* ══ BALANS MODAL ══ */}
-      {balanceModal&&(
-        <div className="modal-overlay" onClick={()=>{setBalanceModal(null);setBalanceInput("");}}>
-          <div className="modal-box" onClick={e=>e.stopPropagation()} style={{maxWidth:380}}>
-            <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:18,fontWeight:700,marginBottom:6,color:
-              balanceModal.mode==="add"?C.green:balanceModal.mode==="sub"?C.red:C.accent}}>
-              {balanceModal.mode==="add"?"➕ Kristal qo'shish":balanceModal.mode==="sub"?"➖ Kristal ayirish":"✏️ Balans o'rnatish"}
-            </div>
-
-            {/* Foydalanuvchi info */}
-            <div style={{display:"flex",alignItems:"center",gap:10,padding:"10px 12px",background:C.card,borderRadius:10,marginBottom:16}}>
-              <div style={{width:36,height:36,borderRadius:"50%",background:`linear-gradient(135deg,${C.purple},${C.blue})`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Rajdhani',sans-serif",fontSize:14,fontWeight:700,color:"#fff",flexShrink:0}}>
-                {(balanceModal.user.name||balanceModal.user.first_name||"?")[0].toUpperCase()}
-              </div>
-              <div>
-                <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700}}>{balanceModal.user.name||balanceModal.user.first_name}</div>
-                <div style={{fontSize:11,color:C.textMuted}}>Hozirgi balans: <span style={{color:C.accent,fontWeight:700}}>{(balanceModal.user.balance||0).toLocaleString()} 💎</span></div>
-              </div>
-            </div>
-
-            <div style={{fontSize:12,color:C.textMuted,marginBottom:8}}>
-              {balanceModal.mode==="add"?"Necha 💎 qo'shish?":balanceModal.mode==="sub"?"Necha 💎 ayirish?":"Yangi balans miqdori:"}
-            </div>
-            <input
-              className="input-field"
-              type="number"
-              placeholder={balanceModal.mode==="add"?"Masalan: 500":balanceModal.mode==="sub"?"Masalan: 100":"Yangi balans"}
-              value={balanceInput}
-              onChange={e=>setBalanceInput(e.target.value)}
-              autoFocus
-              style={{fontSize:20,textAlign:"center",fontFamily:"'Rajdhani',sans-serif",fontWeight:700,letterSpacing:2}}
-            />
-
-            {/* Tez miqdorlar */}
-            {balanceModal.mode!=="set"&&(
-              <div style={{display:"flex",gap:6,marginBottom:12,flexWrap:"wrap"}}>
-                {[100,250,500,1000,2500,5000].map(amt=>(
-                  <button key={amt} onClick={()=>setBalanceInput(String(amt))}
-                    style={{padding:"6px 12px",borderRadius:8,background:balanceInput===String(amt)?`${C.accent}30`:C.card,border:`1px solid ${balanceInput===String(amt)?C.accent:C.border}`,color:balanceInput===String(amt)?C.accent:C.textMuted,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>
-                    {amt.toLocaleString()}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Natija ko'rsatish */}
-            {balanceInput&&(
-              <div style={{padding:"10px 14px",background:
-                balanceModal.mode==="add"?`${C.green}10`:balanceModal.mode==="sub"?`${C.red}10`:`${C.accent}10`,
-                border:`1px solid ${balanceModal.mode==="add"?C.green:balanceModal.mode==="sub"?C.red:C.accent}25`,
-                borderRadius:10,marginBottom:12,textAlign:"center"}}>
-                <div style={{fontSize:11,color:C.textMuted,marginBottom:4}}>Yangi balans bo'ladi:</div>
-                <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:22,fontWeight:700,color:
-                  balanceModal.mode==="add"?C.green:balanceModal.mode==="sub"?C.red:C.accent}}>
-                  {balanceModal.mode==="add"
-                    ?((balanceModal.user.balance||0)+(parseInt(balanceInput)||0)).toLocaleString()
-                    :balanceModal.mode==="sub"
-                    ?Math.max(0,(balanceModal.user.balance||0)-(parseInt(balanceInput)||0)).toLocaleString()
-                    :(parseInt(balanceInput)||0).toLocaleString()} 💎
-                </div>
-              </div>
-            )}
-
-            <button onClick={()=>applyBalance(balanceModal.user)}
-              style={{width:"100%",padding:"14px",borderRadius:12,background:
-                balanceModal.mode==="add"?`linear-gradient(135deg,${C.green},#2E7D32)`:
-                balanceModal.mode==="sub"?`linear-gradient(135deg,${C.red},#B71C1C)`:
-                `linear-gradient(135deg,${C.accent},${C.accentDim})`,
-                border:"none",color:"#fff",fontFamily:"'Rajdhani',sans-serif",fontSize:15,fontWeight:700,cursor:"pointer",letterSpacing:1,marginBottom:8}}>
-              {balanceModal.mode==="add"?"✅ QO'SHISH":balanceModal.mode==="sub"?"✅ AYIRISH":"✅ O'RNATISH"}
-            </button>
-            <button onClick={()=>{setBalanceModal(null);setBalanceInput("");}}
-              style={{width:"100%",padding:"12px",borderRadius:12,background:"transparent",border:`1px solid ${C.border}`,color:C.textMuted,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>
-              Bekor qilish
-            </button>
-          </div>
-        </div>
-      )}
-
       {toast&&<div style={{position:"fixed",top:20,left:"50%",transform:"translateX(-50%)",background:toast.c,color:"#fff",padding:"12px 24px",borderRadius:12,fontFamily:"'Rajdhani',sans-serif",fontWeight:700,fontSize:14,zIndex:9999,whiteSpace:"nowrap"}}>{toast.msg}</div>}
     </div>
   );
@@ -1338,7 +1281,7 @@ const ProfilePage=({user,balance,inventory,onLogout,userPhoto,onPhotoChange,setP
 };
 
 // ══ ADMIN PANEL — KENGAYTIRILGAN ══
-const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
+const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack,activeCases,setActiveCases,activeMarket,setActiveMarket,activePackages,setActivePackages})=>{
   const [tab,setTab]=useState("users");
   const [toast,setToast]=useState(null);
   const showToast=(msg,c=C.green)=>{setToast({msg,c});setTimeout(()=>setToast(null),2500);};
@@ -1360,8 +1303,7 @@ const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
     setUsers(Object.values(all));
   };
 
-  // Balans o'zgartirish
-  const [balanceModal,setBalanceModal]=useState(null); // {user, mode:'add'|'set'|'sub'}
+  const [balanceModal,setBalanceModal]=useState(null);
   const [balanceInput,setBalanceInput]=useState("");
 
   const applyBalance=(targetUser)=>{
@@ -1381,47 +1323,147 @@ const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
     setBalanceModal(null);setBalanceInput("");
   };
 
-  // ── PRODUCTS (TOVARLAR) ──
-  const [products,setProducts]=useState(()=>LS.get("uz_admin_products",[]));
-  const [prodForm,setProdForm]=useState({name:"",price:"",stars:"",category:"knife",image:"",rarity:"common"});
-  const [showProdForm,setShowProdForm]=useState(false);
-  const [editProdIdx,setEditProdIdx]=useState(null);
+  // ── KEYS (CASES) MANAGEMENT ──
+  const [casesData,setCasesData]=useState(activeCases||CASES);
+  const [selCase,setSelCase]=useState(null); // null=list, case=edit
+  const [caseForm,setCaseForm]=useState({name:"",subname:"",price:"",stars:"",rarity:"common",color:"#C8A84B",bg:"linear-gradient(160deg,#1A1A25,#0A0A0F)"});
+  const [showCaseForm,setShowCaseForm]=useState(false);
+  const [editCaseIdx,setEditCaseIdx]=useState(null);
+  // Item inside case
+  const [itemForm,setItemForm]=useState({name:"",rarity:"common",price:"",chance:""});
+  const [editItemIdx,setEditItemIdx]=useState(null);
+  const [showItemForm,setShowItemForm]=useState(false);
 
-  const saveProducts=(arr)=>{setProducts(arr);LS.set("uz_admin_products",arr);};
-  const addProduct=()=>{
-    if(!prodForm.name||!prodForm.price){showToast("Nom va narxni kiriting!",C.red);return;}
-    const newP={...prodForm,id:"p_"+Date.now(),price:parseFloat(prodForm.price)||0,stars:parseInt(prodForm.stars)||0};
-    if(editProdIdx!==null){
-      const arr=[...products];arr[editProdIdx]=newP;saveProducts(arr);showToast("✅ Tovar yangilandi!");
+  const saveCasesData=(arr)=>{setCasesData(arr);setActiveCases(arr);};
+
+  const addCase=()=>{
+    if(!caseForm.name||!caseForm.price){showToast("Nom va narxni kiriting!",C.red);return;}
+    const newC={
+      id:Date.now(),
+      name:caseForm.name,
+      subname:caseForm.subname||"RFL PRO",
+      price:parseInt(caseForm.price)||0,
+      stars:parseInt(caseForm.stars)||0,
+      rarity:caseForm.rarity,
+      opened:0,
+      color:caseForm.color||"#C8A84B",
+      bg:caseForm.bg||"linear-gradient(160deg,#1A1A25,#0A0A0F)",
+      image:"",
+      items:[]
+    };
+    if(editCaseIdx!==null){
+      const arr=[...casesData];arr[editCaseIdx]={...arr[editCaseIdx],...newC,id:arr[editCaseIdx].id,items:arr[editCaseIdx].items};
+      saveCasesData(arr);showToast("✅ Keys yangilandi!");
     }else{
-      saveProducts([...products,newP]);showToast("✅ Tovar qo'shildi!");
+      saveCasesData([...casesData,newC]);showToast("✅ Yangi keys qo'shildi!");
     }
-    setProdForm({name:"",price:"",stars:"",category:"knife",image:"",rarity:"common"});
-    setShowProdForm(false);setEditProdIdx(null);
+    setCaseForm({name:"",subname:"",price:"",stars:"",rarity:"common",color:"#C8A84B",bg:""});
+    setShowCaseForm(false);setEditCaseIdx(null);
   };
-  const deleteProduct=(idx)=>{const arr=products.filter((_,i)=>i!==idx);saveProducts(arr);showToast("🗑️ O'chirildi",C.red);};
-  const editProduct=(idx)=>{setProdForm({...products[idx]});setEditProdIdx(idx);setShowProdForm(true);};
 
-  // ── KEYS ──
-  const [keys,setKeys]=useState(()=>LS.get("uz_admin_keys",[]));
-  const [keyInput,setKeyInput]=useState("");
-  const [keyProduct,setKeyProduct]=useState("");
-  const [keyFilter,setKeyFilter]=useState("all");
-
-  const saveKeys=(arr)=>{setKeys(arr);LS.set("uz_admin_keys",arr);};
-  const addKeys=()=>{
-    const lines=keyInput.split("\n").map(k=>k.trim()).filter(k=>k.length>0);
-    if(!lines.length){showToast("Key kiriting!",C.red);return;}
-    const newKeys=lines.map(k=>({id:"k_"+Date.now()+Math.random(),key:k,productId:keyProduct||"general",usedBy:null,usedAt:null,addedAt:new Date().toLocaleDateString("uz")}));
-    saveKeys([...keys,...newKeys]);
-    setKeyInput("");showToast(`✅ ${lines.length} ta key qo'shildi!`);
+  const deleteCase=(idx)=>{
+    if(!window.confirm&&true){} // skip confirm on mobile
+    const arr=casesData.filter((_,i)=>i!==idx);
+    saveCasesData(arr);
+    if(selCase&&casesData[idx]?.id===selCase.id)setSelCase(null);
+    showToast("🗑️ Keys o'chirildi",C.red);
   };
-  const deleteKey=(id)=>{saveKeys(keys.filter(k=>k.id!==id));showToast("🗑️ Key o'chirildi",C.red);};
-  const filteredKeys=keys.filter(k=>keyFilter==="all"?true:keyFilter==="used"?k.usedBy:!k.usedBy);
+
+  const editCase=(idx)=>{
+    const c=casesData[idx];
+    setCaseForm({name:c.name,subname:c.subname||"",price:String(c.price),stars:String(c.stars||0),rarity:c.rarity,color:c.color||"#C8A84B",bg:c.bg||""});
+    setEditCaseIdx(idx);setShowCaseForm(true);setSelCase(null);
+  };
+
+  const openCaseItems=(c)=>{setSelCase(c);setShowCaseForm(false);setShowItemForm(false);setItemForm({name:"",rarity:"common",price:"",chance:""});setEditItemIdx(null);};
+
+  const addItemToCase=()=>{
+    if(!itemForm.name||!itemForm.price){showToast("Nom va narxni kiriting!",C.red);return;}
+    const img="https://community.cloudflare.steamstatic.com/economy/image/fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEKp8nBRxnN8RDZmY4IUQGG8i_kh-kpzR6xfpLBPiEzRqh0eMmRSBmRABf80FzVV_dMIaMB6cHzf2KHSa7v_gluD0lj96MnBsOz";
+    const newItem={name:itemForm.name,rarity:itemForm.rarity,price:parseFloat(itemForm.price)||0,chance:parseFloat(itemForm.chance)||5,image:img};
+    const cIdx=casesData.findIndex(c=>c.id===selCase.id);
+    if(cIdx===-1)return;
+    const arr=[...casesData];
+    if(editItemIdx!==null){
+      arr[cIdx]={...arr[cIdx],items:arr[cIdx].items.map((it,i)=>i===editItemIdx?newItem:it)};
+      showToast("✅ Skin yangilandi!");
+    }else{
+      arr[cIdx]={...arr[cIdx],items:[...arr[cIdx].items,newItem]};
+      showToast("✅ Skin qo'shildi!");
+    }
+    saveCasesData(arr);
+    setSelCase(arr[cIdx]);
+    setItemForm({name:"",rarity:"common",price:"",chance:""});
+    setShowItemForm(false);setEditItemIdx(null);
+  };
+
+  const deleteItemFromCase=(itemIdx)=>{
+    const cIdx=casesData.findIndex(c=>c.id===selCase.id);
+    if(cIdx===-1)return;
+    const arr=[...casesData];
+    arr[cIdx]={...arr[cIdx],items:arr[cIdx].items.filter((_,i)=>i!==itemIdx)};
+    saveCasesData(arr);setSelCase(arr[cIdx]);
+    showToast("🗑️ Skin o'chirildi",C.red);
+  };
+
+  const editItemInCase=(itemIdx)=>{
+    const cIdx=casesData.findIndex(c=>c.id===selCase.id);
+    const item=casesData[cIdx].items[itemIdx];
+    setItemForm({name:item.name,rarity:item.rarity,price:String(item.price),chance:String(item.chance)});
+    setEditItemIdx(itemIdx);setShowItemForm(true);
+  };
+
+  // ── MARKET MANAGEMENT ──
+  const [marketData,setMarketData]=useState(activeMarket||MARKET_ITEMS);
+  const [mForm,setMForm]=useState({type:"",category:"knife",minPrice:"",maxPrice:"",count:"25",image:""});
+  const [showMForm,setShowMForm]=useState(false);
+  const [editMIdx,setEditMIdx]=useState(null);
+
+  const saveMarketData=(arr)=>{setMarketData(arr);setActiveMarket(arr);};
+
+  const addMarketItem=()=>{
+    if(!mForm.type||!mForm.minPrice){showToast("Nom va narxni kiriting!",C.red);return;}
+    const newM={id:"m_"+Date.now(),type:mForm.type,category:mForm.category,minPrice:parseFloat(mForm.minPrice)||0,maxPrice:parseFloat(mForm.maxPrice)||0,count:parseInt(mForm.count)||25,image:mForm.image||""};
+    if(editMIdx!==null){
+      const arr=[...marketData];arr[editMIdx]=newM;saveMarketData(arr);showToast("✅ Yangilandi!");
+    }else{
+      saveMarketData([...marketData,newM]);showToast("✅ Qo'shildi!");
+    }
+    setMForm({type:"",category:"knife",minPrice:"",maxPrice:"",count:"25",image:""});
+    setShowMForm(false);setEditMIdx(null);
+  };
+
+  const deleteMarketItem=(idx)=>{saveMarketData(marketData.filter((_,i)=>i!==idx));showToast("🗑️ O'chirildi",C.red);};
+  const editMarketItem=(idx)=>{const m=marketData[idx];setMForm({type:m.type,category:m.category,minPrice:String(m.minPrice),maxPrice:String(m.maxPrice),count:String(m.count||25),image:m.image||""});setEditMIdx(idx);setShowMForm(true);};
+
+  // ── PRICES (STARS PACKAGES) ──
+  const [pkgData,setPkgData]=useState(activePackages||STARS_PACKAGES);
+  const [pkgForm,setPkgForm]=useState({stars:"",crystals:"",label:"",bonus:"",hot:false});
+  const [showPkgForm,setShowPkgForm]=useState(false);
+  const [editPkgIdx,setEditPkgIdx]=useState(null);
+
+  const savePkgData=(arr)=>{setPkgData(arr);setActivePackages(arr);};
+
+  const addPackage=()=>{
+    if(!pkgForm.stars||!pkgForm.crystals){showToast("Stars va kristal kiriting!",C.red);return;}
+    const newP={stars:parseInt(pkgForm.stars)||0,crystals:parseInt(pkgForm.crystals)||0,label:pkgForm.label,bonus:pkgForm.bonus||undefined,hot:pkgForm.hot||false};
+    if(!newP.bonus)delete newP.bonus;
+    if(!newP.hot)delete newP.hot;
+    if(editPkgIdx!==null){
+      const arr=[...pkgData];arr[editPkgIdx]=newP;savePkgData(arr);showToast("✅ Yangilandi!");
+    }else{
+      savePkgData([...pkgData,newP]);showToast("✅ Qo'shildi!");
+    }
+    setPkgForm({stars:"",crystals:"",label:"",bonus:"",hot:false});
+    setShowPkgForm(false);setEditPkgIdx(null);
+  };
+
+  const deletePkg=(idx)=>{savePkgData(pkgData.filter((_,i)=>i!==idx));showToast("🗑️ O'chirildi",C.red);};
+  const editPkg=(idx)=>{const p=pkgData[idx];setPkgForm({stars:String(p.stars),crystals:String(p.crystals),label:p.label||"",bonus:p.bonus||"",hot:p.hot||false});setEditPkgIdx(idx);setShowPkgForm(true);};
 
   // ── SKIN PHOTOS ──
   const fileRefs=useRef({});
-  const allSkins=[...new Set(CASES.flatMap(c=>c.items.map(i=>i.name)))];
+  const allSkins=[...new Set((activeCases||CASES).flatMap(c=>c.items.map(i=>i.name)))];
   const [filter,setFilter]=useState("");
   const handleFile=(skinName,e)=>{
     const file=e.target.files[0];if(!file)return;
@@ -1434,10 +1476,11 @@ const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
   const uploaded=allSkins.filter(n=>skinPhotos[n]).length;
 
   const TABS=[
-    {id:"users",label:"👥 Mijozlar"},
-    {id:"products",label:"🎁 Tovarlar"},
-    {id:"keys",label:"🔑 Keylar"},
-    {id:"skins",label:"🖼️ Skinlar"},
+    {id:"users",   label:"👥 Mijozlar"},
+    {id:"keys",    label:"📦 Keys"},
+    {id:"market",  label:"🛒 Market"},
+    {id:"prices",  label:"💰 Narxlar"},
+    {id:"skins",   label:"🖼️ Skinlar"},
   ];
 
   return(
@@ -1447,14 +1490,14 @@ const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
         <button onClick={onBack} style={{background:"transparent",border:`1px solid ${C.border}`,borderRadius:10,padding:"8px 14px",color:C.textMuted,cursor:"pointer",fontFamily:"'Rajdhani',sans-serif",fontSize:16}}>←</button>
         <div>
           <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:20,fontWeight:700,color:C.purple}}>👑 Admin Panel</div>
-          <div style={{fontSize:11,color:C.textMuted}}>{users.length} foydalanuvchi • {products.length} tovar • {keys.length} key</div>
+          <div style={{fontSize:11,color:C.textMuted}}>{users.length} foydalanuvchi • {casesData.length} keys • {marketData.length} market</div>
         </div>
       </div>
 
       {/* Tab buttons */}
       <div style={{display:"flex",gap:6,marginBottom:16,overflowX:"auto",paddingBottom:4}}>
         {TABS.map(t=>(
-          <button key={t.id} onClick={()=>setTab(t.id)} style={{padding:"8px 14px",borderRadius:20,border:`1px solid ${tab===t.id?C.purple:C.border}`,background:tab===t.id?`${C.purple}20`:C.card,color:tab===t.id?C.purple:C.textMuted,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer",whiteSpace:"nowrap",letterSpacing:1}}>
+          <button key={t.id} onClick={()=>{setTab(t.id);setSelCase(null);setShowCaseForm(false);}} style={{padding:"8px 14px",borderRadius:20,border:`1px solid ${tab===t.id?C.purple:C.border}`,background:tab===t.id?`${C.purple}20`:C.card,color:tab===t.id?C.purple:C.textMuted,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer",whiteSpace:"nowrap",letterSpacing:1}}>
             {t.label}
           </button>
         ))}
@@ -1513,7 +1556,6 @@ const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
                     ))}
                   </div>
 
-                  {/* Trade Link */}
                   {u.tradeLink&&(
                     <div style={{background:`${C.blue}10`,border:`1px solid ${C.blue}30`,borderRadius:8,padding:"8px 10px",marginBottom:10}}>
                       <div style={{fontSize:9,color:C.textMuted,marginBottom:2}}>🔗 TRADE LINK</div>
@@ -1526,7 +1568,6 @@ const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
                   )}
                   {!u.tradeLink&&<div style={{fontSize:11,color:C.textMuted,marginBottom:10}}>🔗 Trade link kiritilmagan</div>}
 
-                  {/* Balans boshqaruvi */}
                   <div style={{marginBottom:12}}>
                     <div style={{fontSize:11,color:C.textMuted,marginBottom:6,fontFamily:"'Rajdhani',sans-serif",fontWeight:700}}>💎 BALANS BOSHQARUVI:</div>
                     <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
@@ -1545,7 +1586,6 @@ const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
                     </div>
                   </div>
 
-                  {/* Skinlar */}
                   {(u.inventory||[]).length>0&&(
                     <div>
                       <div style={{fontSize:11,color:C.textMuted,marginBottom:6,fontFamily:"'Rajdhani',sans-serif",fontWeight:700}}>INVENTAR:</div>
@@ -1563,151 +1603,317 @@ const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
               )}
             </div>
           ))}
+
+          {/* Balance Modal */}
+          {balanceModal&&(
+            <div className="modal-overlay" onClick={()=>{setBalanceModal(null);setBalanceInput("");}}>
+              <div className="modal-box" onClick={e=>e.stopPropagation()} style={{maxWidth:380}}>
+                <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:18,fontWeight:700,marginBottom:6,color:
+                  balanceModal.mode==="add"?C.green:balanceModal.mode==="sub"?C.red:C.accent}}>
+                  {balanceModal.mode==="add"?"➕ Kristal qo'shish":balanceModal.mode==="sub"?"➖ Kristal ayirish":"✏️ Balans o'rnatish"}
+                </div>
+                <div style={{display:"flex",alignItems:"center",gap:10,padding:"10px 12px",background:C.card,borderRadius:10,marginBottom:16}}>
+                  <div style={{width:36,height:36,borderRadius:"50%",background:`linear-gradient(135deg,${C.purple},${C.blue})`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Rajdhani',sans-serif",fontSize:14,fontWeight:700,color:"#fff",flexShrink:0}}>
+                    {(balanceModal.user.name||balanceModal.user.first_name||"?")[0].toUpperCase()}
+                  </div>
+                  <div>
+                    <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700}}>{balanceModal.user.name||balanceModal.user.first_name}</div>
+                    <div style={{fontSize:11,color:C.textMuted}}>Hozirgi balans: <span style={{color:C.accent,fontWeight:700}}>{(balanceModal.user.balance||0).toLocaleString()} 💎</span></div>
+                  </div>
+                </div>
+                <input className="input-field" type="number" placeholder="Miqdor" value={balanceInput} onChange={e=>setBalanceInput(e.target.value)} autoFocus style={{fontSize:20,textAlign:"center",fontFamily:"'Rajdhani',sans-serif",fontWeight:700}}/>
+                <div style={{display:"flex",gap:6,marginBottom:12,flexWrap:"wrap"}}>
+                  {[100,250,500,1000,2500,5000].map(amt=>(
+                    <button key={amt} onClick={()=>setBalanceInput(String(amt))} style={{padding:"6px 12px",borderRadius:8,background:balanceInput===String(amt)?`${C.accent}30`:C.card,border:`1px solid ${balanceInput===String(amt)?C.accent:C.border}`,color:balanceInput===String(amt)?C.accent:C.textMuted,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>
+                      {amt.toLocaleString()}
+                    </button>
+                  ))}
+                </div>
+                <button onClick={()=>applyBalance(balanceModal.user)} style={{width:"100%",padding:"14px",borderRadius:12,background:balanceModal.mode==="add"?`linear-gradient(135deg,${C.green},#2E7D32)`:balanceModal.mode==="sub"?`linear-gradient(135deg,${C.red},#B71C1C)`:`linear-gradient(135deg,${C.accent},${C.accentDim})`,border:"none",color:"#fff",fontFamily:"'Rajdhani',sans-serif",fontSize:15,fontWeight:700,cursor:"pointer",letterSpacing:1,marginBottom:8}}>
+                  {balanceModal.mode==="add"?"✅ QO'SHISH":balanceModal.mode==="sub"?"✅ AYIRISH":"✅ O'RNATISH"}
+                </button>
+                <button onClick={()=>{setBalanceModal(null);setBalanceInput("");}} style={{width:"100%",padding:"12px",borderRadius:12,background:"transparent",border:`1px solid ${C.border}`,color:C.textMuted,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>
+                  Bekor qilish
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
-      {/* ══ PRODUCTS TAB ══ */}
-      {tab==="products"&&(
+      {/* ══ KEYS (CASES) TAB ══ */}
+      {tab==="keys"&&(
         <div>
-          <button onClick={()=>{setShowProdForm(true);setEditProdIdx(null);setProdForm({name:"",price:"",stars:"",category:"knife",image:"",rarity:"common"});}}
-            style={{width:"100%",marginBottom:14,padding:"12px",borderRadius:12,background:`${C.green}15`,border:`1px solid ${C.green}40`,color:C.green,fontFamily:"'Rajdhani',sans-serif",fontSize:14,fontWeight:700,cursor:"pointer",letterSpacing:1}}>
-            ➕ YANGI TOVAR QO'SHISH
-          </button>
+          {/* Case items edit view */}
+          {selCase?(
+            <div>
+              <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:14}}>
+                <button onClick={()=>{setSelCase(null);setShowItemForm(false);}} style={{padding:"7px 14px",borderRadius:10,background:`${C.border}20`,border:`1px solid ${C.border}`,color:C.textMuted,fontFamily:"'Rajdhani',sans-serif",fontSize:13,cursor:"pointer"}}>← Ortga</button>
+                <div>
+                  <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:15,fontWeight:700}}>{selCase.name}</div>
+                  <div style={{fontSize:11,color:C.textMuted}}>{selCase.items.length} ta skin</div>
+                </div>
+              </div>
 
-          {showProdForm&&(
-            <div className="card" style={{padding:16,marginBottom:14,border:`1px solid ${C.green}40`}}>
-              <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:14,fontWeight:700,marginBottom:12,color:C.green}}>
-                {editProdIdx!==null?"✏️ Tovarni tahrirlash":"➕ Yangi tovar"}
+              <button onClick={()=>{setShowItemForm(!showItemForm);setItemForm({name:"",rarity:"common",price:"",chance:""});setEditItemIdx(null);}}
+                style={{width:"100%",marginBottom:12,padding:"11px",borderRadius:12,background:`${C.green}15`,border:`1px solid ${C.green}40`,color:C.green,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>
+                ➕ SKIN QO'SHISH
+              </button>
+
+              {showItemForm&&(
+                <div className="card" style={{padding:14,marginBottom:12,border:`1px solid ${C.green}40`}}>
+                  <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,marginBottom:10,color:C.green}}>{editItemIdx!==null?"✏️ Skin tahrirlash":"➕ Yangi skin"}</div>
+                  <input className="input-field" placeholder="Skin nomi (masalan: AK-47 | Redline)" value={itemForm.name} onChange={e=>setItemForm({...itemForm,name:e.target.value})}/>
+                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                    <input className="input-field" placeholder="Narx ($)" type="number" value={itemForm.price} onChange={e=>setItemForm({...itemForm,price:e.target.value})}/>
+                    <input className="input-field" placeholder="Tushish %" type="number" value={itemForm.chance} onChange={e=>setItemForm({...itemForm,chance:e.target.value})}/>
+                  </div>
+                  <select value={itemForm.rarity} onChange={e=>setItemForm({...itemForm,rarity:e.target.value})} style={{width:"100%",background:C.bg,border:`1px solid ${C.border}`,borderRadius:10,padding:"11px 14px",color:C.text,fontFamily:"'Barlow',sans-serif",fontSize:13,outline:"none",marginBottom:10}}>
+                    <option value="common">Common</option>
+                    <option value="rare">Rare</option>
+                    <option value="epic">Epic</option>
+                    <option value="legendary">Legendary</option>
+                    <option value="mythic">Mythic</option>
+                  </select>
+                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                    <button onClick={addItemToCase} style={{padding:"11px",borderRadius:10,background:`${C.green}20`,border:`1px solid ${C.green}50`,color:C.green,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>{editItemIdx!==null?"✅ YANGILASH":"✅ SAQLASH"}</button>
+                    <button onClick={()=>{setShowItemForm(false);setEditItemIdx(null);}} style={{padding:"11px",borderRadius:10,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>❌ BEKOR</button>
+                  </div>
+                </div>
+              )}
+
+              {selCase.items.length===0&&(
+                <div style={{textAlign:"center",padding:30,color:C.textMuted}}>
+                  <div style={{fontSize:36,marginBottom:8}}>📦</div>
+                  <div>Bu keys ichida skin yo'q</div>
+                </div>
+              )}
+              {selCase.items.map((item,idx)=>(
+                <div key={idx} className="card" style={{padding:12,marginBottom:8,display:"flex",alignItems:"center",gap:10,border:`1px solid ${RC[item.rarity]||C.border}30`}}>
+                  <div style={{flex:1,minWidth:0}}>
+                    <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{item.name}</div>
+                    <div style={{display:"flex",gap:8,marginTop:4,flexWrap:"wrap"}}>
+                      <span className="tag" style={{background:`${RC[item.rarity]||C.border}20`,color:RC[item.rarity]||C.textMuted,fontSize:8}}>{item.rarity}</span>
+                      <span style={{fontSize:11,color:C.accent}}>${item.price}</span>
+                      <span style={{fontSize:11,color:C.textMuted}}>{item.chance}% tushish</span>
+                    </div>
+                  </div>
+                  <div style={{display:"flex",gap:4,flexShrink:0}}>
+                    <button onClick={()=>editItemInCase(idx)} style={{padding:"6px 10px",borderRadius:8,background:`${C.accent}15`,border:`1px solid ${C.accent}40`,color:C.accent,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>✏️</button>
+                    <button onClick={()=>deleteItemFromCase(idx)} style={{padding:"6px 8px",borderRadius:8,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>🗑️</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ):(
+            <div>
+              <div style={{display:"flex",gap:8,marginBottom:12}}>
+                <button onClick={()=>{setShowCaseForm(!showCaseForm);setEditCaseIdx(null);setCaseForm({name:"",subname:"",price:"",stars:"",rarity:"common",color:"#C8A84B",bg:"linear-gradient(160deg,#1A1A25,#0A0A0F)"}); }}
+                  style={{flex:1,padding:"11px",borderRadius:12,background:`${C.green}15`,border:`1px solid ${C.green}40`,color:C.green,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>
+                  ➕ YANGI KEYS
+                </button>
+                <button onClick={()=>{saveCasesData(CASES);setCasesData(CASES);showToast("🔄 Asl keys tiklandi",C.accent);}}
+                  style={{padding:"11px 14px",borderRadius:12,background:`${C.accent}10`,border:`1px solid ${C.accent}30`,color:C.accent,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>
+                  🔄 Reset
+                </button>
               </div>
-              <input className="input-field" placeholder="Tovar nomi (masalan: AK-47 | Redline)" value={prodForm.name} onChange={e=>setProdForm({...prodForm,name:e.target.value})}/>
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
-                <input className="input-field" placeholder="Narx ($)" type="number" value={prodForm.price} onChange={e=>setProdForm({...prodForm,price:e.target.value})}/>
-                <input className="input-field" placeholder="Stars soni" type="number" value={prodForm.stars} onChange={e=>setProdForm({...prodForm,stars:e.target.value})}/>
+
+              {showCaseForm&&(
+                <div className="card" style={{padding:14,marginBottom:12,border:`1px solid ${C.green}40`}}>
+                  <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,marginBottom:10,color:C.green}}>{editCaseIdx!==null?"✏️ Keys tahrirlash":"➕ Yangi keys"}</div>
+                  <input className="input-field" placeholder="Keys nomi (masalan: Rusty Case)" value={caseForm.name} onChange={e=>setCaseForm({...caseForm,name:e.target.value})}/>
+                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                    <input className="input-field" placeholder="Narxi (💎)" type="number" value={caseForm.price} onChange={e=>setCaseForm({...caseForm,price:e.target.value})}/>
+                    <input className="input-field" placeholder="Stars" type="number" value={caseForm.stars} onChange={e=>setCaseForm({...caseForm,stars:e.target.value})}/>
+                  </div>
+                  <select value={caseForm.rarity} onChange={e=>setCaseForm({...caseForm,rarity:e.target.value})} style={{width:"100%",background:C.bg,border:`1px solid ${C.border}`,borderRadius:10,padding:"11px 14px",color:C.text,fontFamily:"'Barlow',sans-serif",fontSize:13,outline:"none",marginBottom:10}}>
+                    <option value="common">Common</option>
+                    <option value="rare">Rare</option>
+                    <option value="epic">Epic</option>
+                    <option value="legendary">Legendary</option>
+                    <option value="mythic">Mythic</option>
+                  </select>
+                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                    <button onClick={addCase} style={{padding:"11px",borderRadius:10,background:`${C.green}20`,border:`1px solid ${C.green}50`,color:C.green,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>{editCaseIdx!==null?"✅ YANGILASH":"✅ SAQLASH"}</button>
+                    <button onClick={()=>{setShowCaseForm(false);setEditCaseIdx(null);}} style={{padding:"11px",borderRadius:10,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>❌ BEKOR</button>
+                  </div>
+                </div>
+              )}
+
+              <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:8,marginBottom:12}}>
+                {[{l:"Jami Keys",v:casesData.length,c:C.accent},{l:"Jami Skinlar",v:casesData.reduce((s,c)=>s+(c.items||[]).length,0),c:C.green},{l:"Ochilgan",v:casesData.reduce((s,c)=>s+(c.opened||0),0),c:C.blue}].map(s=>(
+                  <div key={s.l} className="card" style={{padding:10,textAlign:"center"}}>
+                    <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:16,fontWeight:700,color:s.c}}>{typeof s.v==="number"?s.v.toLocaleString():s.v}</div>
+                    <div style={{fontSize:9,color:C.textMuted}}>{s.l}</div>
+                  </div>
+                ))}
               </div>
-              <select value={prodForm.category} onChange={e=>setProdForm({...prodForm,category:e.target.value})} style={{width:"100%",background:C.bg,border:`1px solid ${C.border}`,borderRadius:10,padding:"13px 14px",color:C.text,fontFamily:"'Barlow',sans-serif",fontSize:14,outline:"none",marginBottom:10}}>
+
+              {casesData.map((c,idx)=>(
+                <div key={c.id||idx} className="card" style={{padding:12,marginBottom:8,border:`1px solid ${c.color||C.border}30`}}>
+                  <div style={{display:"flex",alignItems:"center",gap:10}}>
+                    <div style={{width:48,height:40,borderRadius:8,background:`radial-gradient(circle,${c.color||C.accent}30,transparent)`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,border:`1px solid ${c.color||C.border}40`,fontSize:24}}>
+                      {idx===0?"📦":idx===1?"🎨":idx===2?"🎯":"💠"}
+                    </div>
+                    <div style={{flex:1,minWidth:0}}>
+                      <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700}}>{c.name}</div>
+                      <div style={{display:"flex",gap:6,marginTop:3,flexWrap:"wrap"}}>
+                        <span className="tag" style={{background:`${RC[c.rarity]||C.border}20`,color:RC[c.rarity]||C.textMuted,fontSize:8}}>{c.rarity}</span>
+                        <span style={{fontSize:10,color:C.accent}}>💎{c.price}</span>
+                        <span style={{fontSize:10,color:"#FFD700"}}>⭐{c.stars}</span>
+                        <span style={{fontSize:10,color:C.textMuted}}>{(c.items||[]).length} skin</span>
+                      </div>
+                    </div>
+                    <div style={{display:"flex",flexDirection:"column",gap:4,flexShrink:0}}>
+                      <button onClick={()=>openCaseItems(c)} style={{padding:"6px 10px",borderRadius:8,background:`${C.blue}15`,border:`1px solid ${C.blue}40`,color:C.blue,fontFamily:"'Rajdhani',sans-serif",fontSize:10,fontWeight:700,cursor:"pointer"}}>📋 Skinlar</button>
+                      <div style={{display:"flex",gap:4}}>
+                        <button onClick={()=>editCase(idx)} style={{flex:1,padding:"5px 0",borderRadius:6,background:`${C.accent}15`,border:`1px solid ${C.accent}40`,color:C.accent,fontFamily:"'Rajdhani',sans-serif",fontSize:10,fontWeight:700,cursor:"pointer"}}>✏️</button>
+                        <button onClick={()=>deleteCase(idx)} style={{flex:1,padding:"5px 0",borderRadius:6,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:10,fontWeight:700,cursor:"pointer"}}>🗑️</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {casesData.length===0&&<div style={{textAlign:"center",padding:40,color:C.textMuted}}><div style={{fontSize:40,marginBottom:10}}>📦</div><div>Keys yo'q</div></div>}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ══ MARKET TAB ══ */}
+      {tab==="market"&&(
+        <div>
+          <div style={{display:"flex",gap:8,marginBottom:12}}>
+            <button onClick={()=>{setShowMForm(!showMForm);setEditMIdx(null);setMForm({type:"",category:"knife",minPrice:"",maxPrice:"",count:"25",image:""}); }}
+              style={{flex:1,padding:"11px",borderRadius:12,background:`${C.green}15`,border:`1px solid ${C.green}40`,color:C.green,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>
+              ➕ YANGI ITEM
+            </button>
+            <button onClick={()=>{saveMarketData(MARKET_ITEMS);setMarketData(MARKET_ITEMS);showToast("🔄 Asl market tiklandi",C.accent);}}
+              style={{padding:"11px 14px",borderRadius:12,background:`${C.accent}10`,border:`1px solid ${C.accent}30`,color:C.accent,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>
+              🔄 Reset
+            </button>
+          </div>
+
+          {showMForm&&(
+            <div className="card" style={{padding:14,marginBottom:12,border:`1px solid ${C.green}40`}}>
+              <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,marginBottom:10,color:C.green}}>{editMIdx!==null?"✏️ Tahrirlash":"➕ Yangi item"}</div>
+              <input className="input-field" placeholder="Nom (masalan: Karambit)" value={mForm.type} onChange={e=>setMForm({...mForm,type:e.target.value})}/>
+              <select value={mForm.category} onChange={e=>setMForm({...mForm,category:e.target.value})} style={{width:"100%",background:C.bg,border:`1px solid ${C.border}`,borderRadius:10,padding:"11px 14px",color:C.text,fontFamily:"'Barlow',sans-serif",fontSize:13,outline:"none",marginBottom:10}}>
                 <option value="knife">🔪 Knife</option>
                 <option value="rifle">🔫 Rifle</option>
                 <option value="sniper">🎯 Sniper</option>
                 <option value="gloves">🧤 Gloves</option>
-                <option value="other">📦 Boshqa</option>
               </select>
-              <select value={prodForm.rarity} onChange={e=>setProdForm({...prodForm,rarity:e.target.value})} style={{width:"100%",background:C.bg,border:`1px solid ${C.border}`,borderRadius:10,padding:"13px 14px",color:C.text,fontFamily:"'Barlow',sans-serif",fontSize:14,outline:"none",marginBottom:10}}>
-                <option value="common">Common</option>
-                <option value="rare">Rare</option>
-                <option value="epic">Epic</option>
-                <option value="legendary">Legendary</option>
-                <option value="mythic">Mythic</option>
-              </select>
-              <input className="input-field" placeholder="Rasm URL (ixtiyoriy)" value={prodForm.image} onChange={e=>setProdForm({...prodForm,image:e.target.value})}/>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
-                <button onClick={addProduct} style={{padding:"12px",borderRadius:10,background:`${C.green}20`,border:`1px solid ${C.green}50`,color:C.green,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>
-                  {editProdIdx!==null?"✅ YANGILASH":"✅ SAQLASH"}
-                </button>
-                <button onClick={()=>{setShowProdForm(false);setEditProdIdx(null);}} style={{padding:"12px",borderRadius:10,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>
-                  ❌ BEKOR
-                </button>
+                <input className="input-field" placeholder="Min narx ($)" type="number" value={mForm.minPrice} onChange={e=>setMForm({...mForm,minPrice:e.target.value})}/>
+                <input className="input-field" placeholder="Max narx ($)" type="number" value={mForm.maxPrice} onChange={e=>setMForm({...mForm,maxPrice:e.target.value})}/>
+              </div>
+              <input className="input-field" placeholder="Soni" type="number" value={mForm.count} onChange={e=>setMForm({...mForm,count:e.target.value})}/>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                <button onClick={addMarketItem} style={{padding:"11px",borderRadius:10,background:`${C.green}20`,border:`1px solid ${C.green}50`,color:C.green,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>{editMIdx!==null?"✅ YANGILASH":"✅ SAQLASH"}</button>
+                <button onClick={()=>{setShowMForm(false);setEditMIdx(null);}} style={{padding:"11px",borderRadius:10,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>❌ BEKOR</button>
               </div>
             </div>
           )}
 
-          {products.length===0&&!showProdForm&&(
-            <div style={{textAlign:"center",padding:40,color:C.textMuted}}>
-              <div style={{fontSize:40,marginBottom:10}}>📦</div>
-              <div>Hali tovar qo'shilmagan</div>
-            </div>
-          )}
-          {products.map((p,i)=>(
-            <div key={p.id||i} className="card" style={{padding:12,marginBottom:8,display:"flex",alignItems:"center",gap:10}}>
-              <div style={{width:50,height:50,borderRadius:8,background:"#0A0A0F",display:"flex",alignItems:"center",justifyContent:"center",overflow:"hidden",flexShrink:0}}>
-                {p.image?<img src={p.image} style={{width:"100%",height:"100%",objectFit:"contain"}} onError={e=>{e.target.style.display="none";}}/>:<span style={{fontSize:22}}>🎮</span>}
-              </div>
-              <div style={{flex:1,minWidth:0}}>
-                <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:12,fontWeight:700,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{p.name}</div>
-                <div style={{display:"flex",gap:6,marginTop:3,flexWrap:"wrap"}}>
-                  <span className="tag" style={{background:`${RC[p.rarity]||C.border}20`,color:RC[p.rarity]||C.textMuted,fontSize:8}}>{p.rarity}</span>
-                  <span style={{fontSize:10,color:C.accent}}>${p.price}</span>
-                  {p.stars>0&&<span style={{fontSize:10,color:"#FFD700"}}>⭐{p.stars}</span>}
-                  <span style={{fontSize:10,color:C.textMuted}}>{p.category}</span>
-                </div>
-                <div style={{fontSize:10,color:C.textMuted,marginTop:2}}>
-                  🔑 {keys.filter(k=>k.productId===p.id).length} key • 
-                  ✅ {keys.filter(k=>k.productId===p.id&&k.usedBy).length} ishlatilgan
-                </div>
-              </div>
-              <div style={{display:"flex",gap:4,flexShrink:0}}>
-                <button onClick={()=>editProduct(i)} style={{padding:"6px 10px",borderRadius:8,background:`${C.accent}15`,border:`1px solid ${C.accent}40`,color:C.accent,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>✏️</button>
-                <button onClick={()=>deleteProduct(i)} style={{padding:"6px 10px",borderRadius:8,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>🗑️</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* ══ KEYS TAB ══ */}
-      {tab==="keys"&&(
-        <div>
-          {/* Add Keys */}
-          <div className="card" style={{padding:16,marginBottom:14,border:`1px solid ${C.accent}30`}}>
-            <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:14,fontWeight:700,marginBottom:10,color:C.accent}}>🔑 Key qo'shish</div>
-            <select value={keyProduct} onChange={e=>setKeyProduct(e.target.value)} style={{width:"100%",background:C.bg,border:`1px solid ${C.border}`,borderRadius:10,padding:"11px 14px",color:C.text,fontFamily:"'Barlow',sans-serif",fontSize:13,outline:"none",marginBottom:10}}>
-              <option value="">— Tovar tanlang (ixtiyoriy) —</option>
-              <option value="general">📦 Umumiy</option>
-              {products.map(p=>(
-                <option key={p.id} value={p.id}>{p.name}</option>
-              ))}
-            </select>
-            <textarea value={keyInput} onChange={e=>setKeyInput(e.target.value)}
-              placeholder={"Har bir key yangi qatorda:\nXXXX-YYYY-ZZZZ\nAAAA-BBBB-CCCC\n..."}
-              style={{width:"100%",background:C.bg,border:`1px solid ${C.border}`,borderRadius:10,padding:"12px 14px",color:C.text,fontFamily:"monospace",fontSize:12,outline:"none",minHeight:100,resize:"vertical",marginBottom:10,lineHeight:1.6}}
-            />
-            <button onClick={addKeys} style={{width:"100%",padding:"12px",borderRadius:10,background:`linear-gradient(135deg,${C.accent},${C.accentDim})`,border:"none",color:"#0A0A0F",fontFamily:"'Rajdhani',sans-serif",fontSize:14,fontWeight:700,cursor:"pointer",letterSpacing:1}}>
-              ➕ KEYLARNI QO'SHISH
-            </button>
-          </div>
-
-          {/* Stats */}
           <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:8,marginBottom:12}}>
-            {[{l:"Jami",v:keys.length,c:C.accent},{l:"Ishlatilmagan",v:keys.filter(k=>!k.usedBy).length,c:C.green},{l:"Ishlatilgan",v:keys.filter(k=>k.usedBy).length,c:C.red}].map(s=>(
+            {[{l:"Jami",v:marketData.length,c:C.accent},{l:"Knife",v:marketData.filter(m=>m.category==="knife").length,c:C.red},{l:"Qurol",v:marketData.filter(m=>m.category!=="knife").length,c:C.blue}].map(s=>(
               <div key={s.l} className="card" style={{padding:10,textAlign:"center"}}>
-                <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:18,fontWeight:700,color:s.c}}>{s.v}</div>
+                <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:16,fontWeight:700,color:s.c}}>{s.v}</div>
                 <div style={{fontSize:9,color:C.textMuted}}>{s.l}</div>
               </div>
             ))}
           </div>
 
-          {/* Filter */}
-          <div style={{display:"flex",gap:6,marginBottom:12}}>
-            {[["all","Hammasi"],["free","Bo'sh"],["used","Ishlatilgan"]].map(([k,l])=>(
-              <button key={k} onClick={()=>setKeyFilter(k)} style={{padding:"7px 14px",borderRadius:20,border:`1px solid ${keyFilter===k?C.accent:C.border}`,background:keyFilter===k?`${C.accent}15`:C.card,color:keyFilter===k?C.accent:C.textMuted,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>
-                {l}
-              </button>
-            ))}
-          </div>
-
-          {filteredKeys.length===0&&<div style={{textAlign:"center",padding:30,color:C.textMuted}}>
-            <div style={{fontSize:30,marginBottom:8}}>🔑</div>
-            <div>{keyFilter==="all"?"Hali key qo'shilmagan":"Bu bo'limda key yo'q"}</div>
-          </div>}
-          {filteredKeys.map(k=>(
-            <div key={k.id} className="card" style={{padding:12,marginBottom:6,display:"flex",alignItems:"center",gap:8,border:`1px solid ${k.usedBy?C.red+"30":C.green+"30"}`}}>
+          {marketData.map((item,idx)=>(
+            <div key={item.id||idx} className="card" style={{padding:12,marginBottom:8,display:"flex",alignItems:"center",gap:10}}>
+              <div style={{width:50,height:42,borderRadius:8,background:"#0A0A0F",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:22}}>
+                {item.category==="knife"?"🔪":item.category==="sniper"?"🎯":"🔫"}
+              </div>
               <div style={{flex:1,minWidth:0}}>
-                <div style={{fontFamily:"monospace",fontSize:12,fontWeight:700,color:k.usedBy?C.textMuted:C.text,wordBreak:"break-all"}}>{k.key}</div>
-                <div style={{display:"flex",gap:8,marginTop:4,flexWrap:"wrap"}}>
-                  {k.productId&&k.productId!=="general"&&(
-                    <span style={{fontSize:9,color:C.accent}}>{products.find(p=>p.id===k.productId)?.name||k.productId}</span>
-                  )}
-                  {k.usedBy&&<span style={{fontSize:9,color:C.red}}>✅ Ishlatilgan: @{k.usedBy}</span>}
-                  {!k.usedBy&&<span style={{fontSize:9,color:C.green}}>🟢 Bo'sh</span>}
-                  <span style={{fontSize:9,color:C.textMuted}}>{k.addedAt}</span>
+                <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{item.type}</div>
+                <div style={{display:"flex",gap:6,marginTop:3,flexWrap:"wrap"}}>
+                  <span className="tag" style={{background:`${C.accent}15`,color:C.accent,fontSize:8}}>{item.category}</span>
+                  <span style={{fontSize:10,color:C.green}}>${item.minPrice?.toFixed(2)} – ${item.maxPrice?.toLocaleString()}</span>
+                  <span style={{fontSize:10,color:C.textMuted}}>{item.count} ta</span>
                 </div>
               </div>
               <div style={{display:"flex",gap:4,flexShrink:0}}>
-                <button onClick={()=>{try{navigator.clipboard.writeText(k.key);}catch{}showToast("📋 Nusxa olindi!");}}
-                  style={{padding:"6px 10px",borderRadius:8,background:`${C.accent}15`,border:`1px solid ${C.accent}40`,color:C.accent,fontFamily:"'Rajdhani',sans-serif",fontSize:10,fontWeight:700,cursor:"pointer"}}>📋</button>
-                <button onClick={()=>deleteKey(k.id)} style={{padding:"6px 8px",borderRadius:8,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:10,fontWeight:700,cursor:"pointer"}}>🗑️</button>
+                <button onClick={()=>editMarketItem(idx)} style={{padding:"6px 10px",borderRadius:8,background:`${C.accent}15`,border:`1px solid ${C.accent}40`,color:C.accent,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>✏️</button>
+                <button onClick={()=>deleteMarketItem(idx)} style={{padding:"6px 8px",borderRadius:8,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>🗑️</button>
               </div>
             </div>
           ))}
+          {marketData.length===0&&<div style={{textAlign:"center",padding:40,color:C.textMuted}}><div style={{fontSize:40,marginBottom:10}}>🛒</div><div>Market bo'sh</div></div>}
+        </div>
+      )}
+
+      {/* ══ PRICES TAB ══ */}
+      {tab==="prices"&&(
+        <div>
+          <div style={{background:`${C.accent}08`,border:`1px solid ${C.accent}25`,borderRadius:12,padding:"10px 14px",marginBottom:14,fontSize:12,color:C.textMuted}}>
+            💡 Bu yerda Stars paketlari narxlarini boshqaring. Foydalanuvchilar "Balans" sahifasida bu paketlarni ko'radi.
+          </div>
+
+          <div style={{display:"flex",gap:8,marginBottom:12}}>
+            <button onClick={()=>{setShowPkgForm(!showPkgForm);setEditPkgIdx(null);setPkgForm({stars:"",crystals:"",label:"",bonus:"",hot:false});}}
+              style={{flex:1,padding:"11px",borderRadius:12,background:`${C.green}15`,border:`1px solid ${C.green}40`,color:C.green,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>
+              ➕ PAKET QO'SHISH
+            </button>
+            <button onClick={()=>{savePkgData(STARS_PACKAGES);setPkgData(STARS_PACKAGES);showToast("🔄 Asl narxlar tiklandi",C.accent);}}
+              style={{padding:"11px 14px",borderRadius:12,background:`${C.accent}10`,border:`1px solid ${C.accent}30`,color:C.accent,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>
+              🔄 Reset
+            </button>
+          </div>
+
+          {showPkgForm&&(
+            <div className="card" style={{padding:14,marginBottom:12,border:`1px solid ${C.green}40`}}>
+              <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,marginBottom:10,color:C.green}}>{editPkgIdx!==null?"✏️ Tahrirlash":"➕ Yangi paket"}</div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                <input className="input-field" placeholder="Stars soni (masalan: 10)" type="number" value={pkgForm.stars} onChange={e=>setPkgForm({...pkgForm,stars:e.target.value})}/>
+                <input className="input-field" placeholder="💎 Kristal miqdori" type="number" value={pkgForm.crystals} onChange={e=>setPkgForm({...pkgForm,crystals:e.target.value})}/>
+              </div>
+              <input className="input-field" placeholder="Paket nomi (masalan: Premium)" value={pkgForm.label} onChange={e=>setPkgForm({...pkgForm,label:e.target.value})}/>
+              <input className="input-field" placeholder="Bonus matni (masalan: +20%, ixtiyoriy)" value={pkgForm.bonus} onChange={e=>setPkgForm({...pkgForm,bonus:e.target.value})}/>
+              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
+                <input type="checkbox" id="hot-check" checked={pkgForm.hot} onChange={e=>setPkgForm({...pkgForm,hot:e.target.checked})} style={{width:16,height:16,cursor:"pointer"}}/>
+                <label htmlFor="hot-check" style={{fontSize:13,color:C.textMuted,cursor:"pointer"}}>🔥 HOT (eng mashhur) deb belgilash</label>
+              </div>
+              {pkgForm.stars&&pkgForm.crystals&&(
+                <div style={{padding:"10px 14px",background:`${C.purple}10`,border:`1px solid ${C.purple}25`,borderRadius:10,marginBottom:10,textAlign:"center"}}>
+                  <span style={{fontFamily:"'Rajdhani',sans-serif",fontWeight:700,color:"#FFD700"}}>⭐{pkgForm.stars} Stars</span>
+                  <span style={{color:C.textMuted,margin:"0 8px"}}>→</span>
+                  <span style={{fontFamily:"'Rajdhani',sans-serif",fontWeight:700,color:C.accent}}>💎{parseInt(pkgForm.crystals).toLocaleString()}</span>
+                </div>
+              )}
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                <button onClick={addPackage} style={{padding:"11px",borderRadius:10,background:`${C.green}20`,border:`1px solid ${C.green}50`,color:C.green,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>{editPkgIdx!==null?"✅ YANGILASH":"✅ SAQLASH"}</button>
+                <button onClick={()=>{setShowPkgForm(false);setEditPkgIdx(null);}} style={{padding:"11px",borderRadius:10,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:13,fontWeight:700,cursor:"pointer"}}>❌ BEKOR</button>
+              </div>
+            </div>
+          )}
+
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:8}}>
+            {pkgData.map((p,idx)=>(
+              <div key={idx} className="card" style={{padding:14,border:`1px solid ${p.hot?C.purple:C.border}`,position:"relative"}}>
+                {p.hot&&<div style={{position:"absolute",top:-8,right:8,background:`linear-gradient(135deg,${C.purple},#9C27B0)`,color:"#fff",fontSize:9,fontWeight:700,fontFamily:"'Rajdhani',sans-serif",padding:"2px 8px",borderRadius:10}}>🔥 HOT</div>}
+                {p.bonus&&<div className="tag" style={{background:`${C.green}20`,color:C.green,marginBottom:6,fontSize:9}}>{p.bonus}</div>}
+                <div style={{display:"flex",alignItems:"center",gap:4,marginBottom:3}}>
+                  <StarIcon size={14}/><span style={{fontFamily:"'Rajdhani',sans-serif",fontSize:20,fontWeight:700,color:"#FFD700"}}>{p.stars}</span>
+                </div>
+                <div style={{fontSize:9,color:"#FFD700",opacity:0.7,marginBottom:6,fontFamily:"'Rajdhani',sans-serif"}}>STARS</div>
+                <div style={{display:"flex",alignItems:"center",gap:3,marginBottom:3}}>
+                  <Crystal size={11}/><span style={{fontFamily:"'Rajdhani',sans-serif",fontSize:14,fontWeight:700,color:C.accent}}>{p.crystals.toLocaleString()}</span>
+                </div>
+                <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:9,color:C.textMuted,marginBottom:8}}>{p.label}</div>
+                <div style={{display:"flex",gap:4}}>
+                  <button onClick={()=>editPkg(idx)} style={{flex:1,padding:"5px 0",borderRadius:6,background:`${C.accent}15`,border:`1px solid ${C.accent}40`,color:C.accent,fontFamily:"'Rajdhani',sans-serif",fontSize:10,fontWeight:700,cursor:"pointer"}}>✏️</button>
+                  <button onClick={()=>deletePkg(idx)} style={{flex:1,padding:"5px 0",borderRadius:6,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:10,fontWeight:700,cursor:"pointer"}}>🗑️</button>
+                </div>
+              </div>
+            ))}
+          </div>
+          {pkgData.length===0&&<div style={{textAlign:"center",padding:40,color:C.textMuted}}><div style={{fontSize:40,marginBottom:10}}>💰</div><div>Narx paketlari yo'q</div></div>}
         </div>
       )}
 
@@ -1734,7 +1940,7 @@ const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
           </div>
           {filteredSkins.map(skinName=>{
             const hasPhoto=!!skinPhotos[skinName];
-            const caseForSkin=CASES.find(c=>c.items.find(i=>i.name===skinName));
+            const caseForSkin=(activeCases||CASES).find(c=>c.items.find(i=>i.name===skinName));
             const itemData=caseForSkin?.items.find(i=>i.name===skinName);
             return(
               <div key={skinName} className="card" style={{padding:12,marginBottom:8,display:"flex",alignItems:"center",gap:12,border:`1px solid ${hasPhoto?C.green+"40":C.border}`}}>
@@ -1755,7 +1961,7 @@ const AdminPanel=({skinPhotos,onSkinPhotoChange,onSkinPhotoRemove,onBack})=>{
                     {hasPhoto?"✏️":"📁"}
                   </button>
                   {hasPhoto&&(
-                    <button onClick={()=>{onSkinPhotoRemove(skinName);showToast(`🗑️ ${skinName} rasmi o'chirildi`,C.red);}} style={{padding:"7px 10px",borderRadius:8,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>🗑️</button>
+                    <button onClick={()=>{onSkinPhotoRemove(skinName);showToast(`🗑️ Rasm o'chirildi`,C.red);}} style={{padding:"7px 10px",borderRadius:8,background:`${C.red}10`,border:`1px solid ${C.red}30`,color:C.red,fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:700,cursor:"pointer"}}>🗑️</button>
                   )}
                 </div>
               </div>
@@ -1811,7 +2017,7 @@ const ChannelGate=({onSubscribed})=>{
     <div style={{minHeight:"100vh",background:"#0A0A0F",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24}}>
       <div style={{marginBottom:32,textAlign:"center"}}>
         <div style={{animation:"floatCrystal 3s ease-in-out infinite",display:"inline-block",marginBottom:12,fontSize:72}}>💎</div>
-        <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:38,fontWeight:700,letterSpacing:4,color:"#C8A84B"}}>UzSkin</div>
+        <div style={{fontFamily:"'Rajdhani',sans-serif",fontSize:38,fontWeight:700,letterSpacing:4,color:"#C8A84B"}}>SKINUZ</div>
         <div style={{fontSize:12,color:"#7A7A9A",letterSpacing:2,marginTop:4}}>CS2 SKIN PLATFORMASI</div>
       </div>
 
@@ -1859,6 +2065,11 @@ function App(){
   const [loading,setLoading]=useState(true);
   const [userPhoto,setUserPhoto]=useState(null);
   const [subscribed,setSubscribed]=useState(()=>LS.get("uz_subscribed",false));
+
+  // Dinamik ma'lumotlar (admin paneldan boshqariladi)
+  const [activeCases,setActiveCases]=useState(()=>loadAdminCases()||CASES);
+  const [activeMarket,setActiveMarket]=useState(()=>loadAdminMarket()||MARKET_ITEMS);
+  const [activePackages,setActivePackages]=useState(()=>loadAdminPackages()||STARS_PACKAGES);
 
   useEffect(()=>{
     tg.expand?.();tg.ready?.();
@@ -1914,14 +2125,18 @@ function App(){
 
   return(
     <div style={{maxWidth:480,margin:"0 auto"}}>
-      {page==="cases"   &&<CasesPage     user={u} balance={balance} setBalance={setBalance} setInventory={setInventory} onTaskComplete={onTask} userPhoto={userPhoto} skinPhotos={skinPhotos}/>}
-      {page==="market"  &&<MarketPage    user={u} balance={balance} userPhoto={userPhoto} skinPhotos={skinPhotos}/>}
-      {page==="balance" &&<BalancePage   user={u} balance={balance} setBalance={setBalance} userPhoto={userPhoto}/>}
+      {page==="cases"   &&<CasesPage     user={u} balance={balance} setBalance={setBalance} setInventory={setInventory} onTaskComplete={onTask} userPhoto={userPhoto} skinPhotos={skinPhotos} activeCases={activeCases}/>}
+      {page==="market"  &&<MarketPage    user={u} balance={balance} userPhoto={userPhoto} skinPhotos={skinPhotos} activeMarket={activeMarket}/>}
+      {page==="balance" &&<BalancePage   user={u} balance={balance} setBalance={setBalance} userPhoto={userPhoto} activePackages={activePackages}/>}
       {page==="friends" &&<FriendsPage   user={u} balance={balance}/>}
       {page==="tasks"   &&<TasksPage     user={u} balance={balance} setBalance={setBalance} completedTasks={completedTasks} setCompletedTasks={setCompletedTasks} saveUser={save}/>}
       {page==="inventory"&&<InventoryPage user={u} inventory={inventory} setInventory={setInventory} userPhoto={userPhoto} skinPhotos={skinPhotos}/>}
       {page==="profile" &&<ProfilePage   user={u} balance={balance} inventory={inventory} onLogout={onLogout} userPhoto={userPhoto} onPhotoChange={onPhotoChange} setPage={setPage} isAdmin={u.username===ADMIN_USERNAME}/>}
-      {page==="admin"   &&<AdminPanel    skinPhotos={skinPhotos} onSkinPhotoChange={onSkinPhotoChange} onSkinPhotoRemove={onSkinPhotoRemove} onBack={()=>setPage("profile")}/>}
+      {page==="admin"   &&<AdminPanel    skinPhotos={skinPhotos} onSkinPhotoChange={onSkinPhotoChange} onSkinPhotoRemove={onSkinPhotoRemove} onBack={()=>setPage("profile")}
+        activeCases={activeCases} setActiveCases={(arr)=>{setActiveCases(arr);saveAdminCases(arr);}}
+        activeMarket={activeMarket} setActiveMarket={(arr)=>{setActiveMarket(arr);saveAdminMarket(arr);}}
+        activePackages={activePackages} setActivePackages={(arr)=>{setActivePackages(arr);saveAdminPackages(arr);}}
+      />}
       <NavBar cur={page} setPage={setPage} invCount={inventory.filter(i=>!i.status).length}/>
     </div>
   );
